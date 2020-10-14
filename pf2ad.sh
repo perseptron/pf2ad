@@ -5,6 +5,7 @@ VERSION='20180302001' # Welcome to Brasil
 if [ -f "/etc/samba.patch.version" ]; then
 	if [ "$(cat /etc/samba.patch.version)" = "$VERSION" ]; then
 		echo "ERROR: Changes have been applied!"
+		echo "$VERSION"
 		exit 2
 	fi
 fi
