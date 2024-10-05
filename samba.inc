@@ -110,7 +110,6 @@ EOD;
    idmap config $workgroup:schema_mode = rfc2307
    idmap config $workgroup:range = 500-40000
    winbind nss info = rfc2307
-   winbind trusted domains only = no
    winbind use default domain = yes
    winbind enum users  = no
    winbind enum groups = no
