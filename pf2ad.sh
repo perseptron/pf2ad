@@ -16,6 +16,10 @@ if [ "$(cat /etc/version)" != "2.7.2-RELEASE" ]; then
 	exit 2
 fi
 
+if [ ! "$(/usr/sbin/pkg info | grep pfSense-pkg-squid)" ]; then
+	/usr/sbin/pkg install -r pfSense pfSense-pkg-squid
+fi
+
 ASSUME_ALWAYS_YES=YES
 export ASSUME_ALWAYS_YES
 
@@ -88,10 +92,6 @@ exec;
 exit
 EOF
 
-
-if [ ! "$(/usr/sbin/pkg info | grep pfSense-pkg-squid)" ]; then
-	/usr/sbin/pkg install -r pfSense pfSense-pkg-squid
-fi
 cd /usr/local/pkg
 fetch -o - -q https://raw.githubusercontent.com/perseptron/pf2ad/master/squid_winbind_auth.patch | patch -b -p0 -f
 fetch -o /usr/local/pkg -q https://raw.githubusercontent.com/perseptron/pf2ad/master/squid.inc
