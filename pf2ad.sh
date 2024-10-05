@@ -36,8 +36,6 @@ pf2ad: {
 }
 EOF
 
-ls -al /usr/local/libexec/squid
-
 /usr/sbin/pkg update -r pf2ad
 /usr/sbin/pkg install -r pf2ad samba419 2> /dev/null
 /usr/sbin/pkg install -r pf2ad squid 2> /dev/null
@@ -96,9 +94,8 @@ fi
 cd /usr/local/pkg
 fetch -o - -q https://raw.githubusercontent.com/perseptron/pf2ad/master/squid_winbind_auth.patch | patch -b -p0 -f
 fetch -o /usr/local/pkg -q https://raw.githubusercontent.com/perseptron/pf2ad/master/squid.inc
-
-cd /usr/local/libexec/squid
-fetch -o /usr/local/pkg -q https://raw.githubusercontent.com/perseptron/pf2ad/master/basic_ldap_auth
+fetch -o /usr/local/libexec/squid -q https://raw.githubusercontent.com/perseptron/pf2ad/master/basic_ldap_auth
+chmod +x /usr/local/libexec/squid/basic_ldap_auth
 
 if [ ! -f "/usr/local/etc/smb4.conf" ]; then
 	touch /usr/local/etc/smb4.conf
