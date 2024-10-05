@@ -1443,7 +1443,7 @@ function squid_resync_general() {
 	$conf .= <<< EOD
 icp_port {$icp_port}
 digest_generation {$digest_generation}
-dns_v4_first {$dns_v4_first}
+# dns_v4_first {$dns_v4_first}
 pid_filename {$pidfile}
 cache_effective_user {$squid_uid}
 cache_effective_group {$squid_gid}
