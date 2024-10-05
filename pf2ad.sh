@@ -40,6 +40,8 @@ pf2ad: {
 }
 EOF
 
+ls -al /usr/local/libexec/squid
+
 /usr/sbin/pkg update -r pf2ad
 /usr/sbin/pkg install -r pf2ad samba419 2> /dev/null
 /usr/sbin/pkg install -r pf2ad squid 2> /dev/null
