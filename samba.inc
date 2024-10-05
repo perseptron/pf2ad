@@ -103,6 +103,7 @@ EOD;
    security = ADS
    realm = $domain
    encrypt passwords = yes
+   kerberos method = secrets and keytab
    interfaces = $hostip[0]
    idmap config *:backend = tdb
    idmap config *:range = 70001-80000
