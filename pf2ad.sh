@@ -1,6 +1,6 @@
 #!/bin/sh
 
-VERSION='20180302001' # Welcome to Brasil
+VERSION='20240510' # Welcome to Ukraine
 
 if [ -f "/etc/samba.patch.version" ]; then
 	if [ "$(cat /etc/samba.patch.version)" = "$VERSION" ]; then
@@ -11,8 +11,8 @@ if [ -f "/etc/samba.patch.version" ]; then
 fi
 
 # Verifica versao pfSense
-if [ "$(cat /etc/version)" != "2.5.1-RELEASE" ]; then
-	echo "ERROR: You need the pfSense version 2.5.1 to apply this script"
+if [ "$(cat /etc/version)" != "2.7.2-RELEASE" ]; then
+	echo "ERROR: You need the pfSense version 2.7.2 to apply this script"
 	exit 2
 fi
 
@@ -24,23 +24,23 @@ export ASSUME_ALWAYS_YES
 
 # Lock packages necessary
 /usr/sbin/pkg lock pkg
-/usr/sbin/pkg lock pfSense-2.5.1
+/usr/sbin/pkg lock pfSense-2.7.2
 
 mkdir -p /usr/local/etc/pkg/repos
 
 cat <<EOF > /usr/local/etc/pkg/repos/pf2ad.conf
 pf2ad: {
-    url: "https://github.com/pf2ad/packages/raw/11.1",
-    mirror_type: "https",
-    enabled: yes
+  url: "https://pkg.freebsd.org/FreeBSD:14:amd64/latest/",
+  mirror_type: "https",
+  enabled: yes
 }
 EOF
 
 /usr/sbin/pkg update -r pf2ad
-/usr/sbin/pkg install -r pf2ad net/samba44 2> /dev/null
+/usr/sbin/pkg install -r pf2ad samba419 2> /dev/null
 
 /usr/sbin/pkg unlock pkg
-/usr/sbin/pkg unlock pfSense-2.4.4
+/usr/sbin/pkg unlock pfSense-2.7.2
 
 rm -rf /usr/local/etc/pkg/repos/pf2ad.conf
 /usr/sbin/pkg update
