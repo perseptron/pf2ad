@@ -142,6 +142,7 @@ EOD;
       // Create key tab file (kerberos)
       if (!file_exists('/etc/krb5.keytab')) {
         mwexec("/usr/local/bin/net ads keytab create -U '" . $username . "%" . $adminpass . "'");
+	sleep(2);
         mwexec("/usr/sbin/chown :proxy /etc/krb5.keytab");
         mwexec("/bin/chmod 0750 /etc/krb5.keytab");
       }
