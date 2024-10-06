@@ -2096,8 +2096,7 @@ function squid_resync_auth() {
 					$conf .= "auth_param ntlm children {$ntlm_proc}\n";
 					$conf .= "auth_param ntlm keep_alive off\n";
 				}
-				//$samba_conf = $config['installedpackages']['samba']['config'][0];
-				$samba_conf = config_get_path('installedpackages/squid/config/0');
+				$samba_conf = config_get_path('installedpackages/samba/config/0');
 				exec('/usr/local/bin/net ads info | /usr/bin/grep "Bind Path"', $saida0);
 				$bind_ad = strtolower(preg_split('/: /', $saida0[0])[1]);
 				exec('/usr/local/bin/net ads info | /usr/bin/grep "LDAP server name"', $saida1);
