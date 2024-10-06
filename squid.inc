@@ -2101,7 +2101,7 @@ function squid_resync_auth() {
 				$bind_ad = strtolower(preg_split('/: /', $saida0[0])[1]);
 				exec('/usr/local/bin/net ads info | /usr/bin/grep "LDAP server name"', $saida1);
 				$bind_server = strtolower(preg_split('/: /', $saida1[0])[1]);
-				$conf .= "auth_param basic program " . SQUID_LOCALBASE . "/libexec/squid/basic_ldap_auth -b \"" . $bind_ad ."\" -D \"". $samba_conf['member_username'] ."@". $samba_conf['member_domain'] ."\" -w \"". $samba_conf['member_password'] ."\" -f sAMAccountName=%s -h ". $bind_server ."\n";
+				$conf .= "auth_param basic program " . SQUID_LOCALBASE . "/libexec/squid/basic_ldap_auth -v 3 -R -b \"" . $bind_ad ."\" -D \"". $samba_conf['member_username'] ."@". $samba_conf['member_domain'] ."\" -w \"". $samba_conf['member_password'] ."\" -f sAMAccountName=%s -h ". $bind_server ."\n";
 				$conf .= "auth_param basic children {$ntlm_proc}\n";
 				$conf .= "auth_param basic credentialsttl 1 minute\n";
 				break;
